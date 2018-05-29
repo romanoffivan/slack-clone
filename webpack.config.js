@@ -1,9 +1,10 @@
 const webpack = require('webpack');
+const path = require('path');
 
 module.exports = {
   mode: process.env.NODE_ENV || 'development',
   entry: [
-    `${__dirname}/src/index.js`,
+    `./app/index.js`,
   ],
   externals: {
     gon: 'gon',
@@ -12,7 +13,9 @@ module.exports = {
     extensions: ['.js', '.jsx'],
   },
   output: {
-    publicPath: '/assets/'
+    path: path.join(__dirname, 'dist', 'assets'),
+    filename: 'application.js',
+    publicPath: '/assets/',
   },
   module: {
     rules: [

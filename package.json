@@ -27,8 +27,8 @@
   },
   "homepage": "https://github.com/romanoffivan/project-lvl4-s235#readme",
   "devDependencies": {
-    "babel-eslint": "^8.2.3",
     "babel-core": "^7.0.0-0",
+    "babel-eslint": "^8.2.3",
     "eslint": "^4.19.1",
     "eslint-config-airbnb-base": "^12.1.0",
     "eslint-plugin-import": "^2.11.0",
