@@ -1,10 +1,9 @@
-const webpack = require('webpack');
-const path = require('path');
+import path from 'path';
 
 module.exports = {
   mode: process.env.NODE_ENV || 'development',
   entry: [
-    `./app/index.js`,
+    './app/index.js',
   ],
   externals: {
     gon: 'gon',
