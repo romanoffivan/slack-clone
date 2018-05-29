@@ -1,12 +1,12 @@
 import React from 'react';
-import ChannelList from './ChannelList';
 import gon from 'gon';
+import ChannelList from './ChannelList';
 
-const channels = gon.channels;
+const channelsList = gon.channels;
 
 const App = props => (
   <div className="col-md-4 order-md-2 mb-4">
-    <ChannelList channels={channels} />
+    <ChannelList channels={channelsList} />
     <p className="col">Your nickname {props.userName}</p>
   </div>
 );

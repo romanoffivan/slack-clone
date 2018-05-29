@@ -1,10 +1,8 @@
-const webpack = require('webpack');
-const path = require('path');
 
 module.exports = {
   mode: process.env.NODE_ENV || 'development',
   entry: [
-    './app/index.js',
+    `${__dirname}/app/index.jsx`,
   ],
   externals: {
     gon: 'gon',
@@ -13,7 +11,7 @@ module.exports = {
     extensions: ['.js', '.jsx'],
   },
   output: {
-    path: path.join(__dirname, 'dist', 'assets'),
+    path: `${__dirname}/dist/assets`,
     filename: 'application.js',
     publicPath: '/assets/',
   },
@@ -30,11 +28,4 @@ module.exports = {
       },
     ],
   },
-  plugins: [
-    new webpack.ProvidePlugin({
-      $: 'jquery',
-      jQuery: 'jquery',
-      'window.jQuery': 'jquery',
-    }),
-  ],
 };

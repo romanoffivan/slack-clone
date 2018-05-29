@@ -2,16 +2,17 @@
   "name": "project-lvl4-s235",
   "version": "0.0.1",
   "description": "clone of slack",
+  "main": "dist/index.js",
   "scripts": {
     "nodemon": "nodemon",
-    "test": "jest",
     "babel-node": "babel-node",
-    "start": "babel-node ./server/bin/slack.js",
-    "eslint": "eslint .",
+    "eslint": "eslint",
+    "test": "jest",
     "webpack": "webpack",
-    "build-server": "babel server --out-dir dist --source-maps inline",
-    "build-app": "npm run webpack -- -p --env production",
+    "start": "node ./dist/bin/slack.js",
     "build": "npm run build-app && npm run build-server",
+    "build-app": "npm run webpack",
+    "build-server": "babel server --out-dir dist --source-maps inline",
     "postinstall": "npm run build"
   },
   "repository": {
