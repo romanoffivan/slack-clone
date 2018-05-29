@@ -1,4 +1,5 @@
-import path from 'path';
+const webpack = require('webpack');
+const path = require('path');
 
 module.exports = {
   mode: process.env.NODE_ENV || 'development',
@@ -29,11 +30,11 @@ module.exports = {
       },
     ],
   },
-  // plugins: [
-  // new webpack.ProvidePlugin({
-  //   $: 'jquery',
-  //   jQuery: 'jquery',
-  //   'window.jQuery': 'jquery',
-  // }),
-  // ],
+  plugins: [
+    new webpack.ProvidePlugin({
+      $: 'jquery',
+      jQuery: 'jquery',
+      'window.jQuery': 'jquery',
+    }),
+  ],
 };
