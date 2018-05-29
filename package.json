@@ -3,6 +3,9 @@
   "version": "0.0.1",
   "description": "clone of slack",
   "main": "dist/index.js",
+  "engines": {
+    "node": "9"
+  },
   "scripts": {
     "nodemon": "nodemon",
     "babel-node": "babel-node",
