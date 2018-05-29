@@ -4,7 +4,6 @@ import { render } from 'react-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import faker from 'faker';
 import cookies from 'js-cookie';
-import '../assets/application.css';
 import App from './components/App.jsx';
 
 if (process.env.NODE_ENV !== 'production') {
