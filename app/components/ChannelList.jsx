@@ -1,16 +1,23 @@
 import React from 'react';
 
-export default class ChannelList extends React.Component {
+class ChannelList extends React.Component {
   renderList = () => {
     const { channels } = this.props;
 
-    return channels.map(({ id, name }) =>
-      <a href="#" className="list-group-item list-group-item-action" id={id}>{name}</a>);
+    return channels.map(channel => (
+      <li className="list-group-item list-group-item-action" key={channel.id}>
+        {channel.name}
+      </li>
+    ));
   }
 
   render() {
-    return <div className="list-group">
-      {this.renderList()}
-    </div>
+    return (
+      <ul className="col-md -3 list-group">
+        {this.renderList()}
+      </ul>
+    );
   }
-};
+}
+
+export default ChannelList;

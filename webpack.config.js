@@ -2,7 +2,7 @@
 module.exports = {
   mode: process.env.NODE_ENV || 'development',
   entry: [
-    `${__dirname}/app/index.jsx`,
+    `${__dirname}/app/index.js`,
   ],
   externals: {
     gon: 'gon',

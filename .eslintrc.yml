@@ -11,6 +11,6 @@ env:
   node: true
 
 rules:
-  import/no-unresolved: 0
-  import/extensions: 0
+  import/no-unresolved: true
+  import/extensions: true
   react/prop-types: 0
