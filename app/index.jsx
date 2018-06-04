@@ -7,8 +7,6 @@ import { createStore, applyMiddleware, compose } from 'redux';
 import _ from 'lodash';
 import thunk from 'redux-thunk';
 import gon from 'gon';
-import cookies from 'js-cookie';
-import faker from 'faker';
 import App from './containers/App';
 import reducers from './reducers';
 import * as actions from './actions';
@@ -21,15 +19,12 @@ const preloadedState = {
   currentChannelId,
 };
 
-const ext = window.__REDUX_DEVTOOLS_EXTENSION__; // eslint-disable-line
-const devtoolMiddleware = ext && ext();
-
 const store = createStore(
   reducers,
   preloadedState,
   compose(
+    window.__REDUX_DEVTOOLS_EXTENSION__ ? window.__REDUX_DEVTOOLS_EXTENSION__() : f => f, // eslint-disable-line
     applyMiddleware(thunk),
-    devtoolMiddleware,
   ),
 );
 
@@ -41,17 +36,9 @@ socket
     store.dispatch(actions.addMessage(data));
   });
 
-const userName = faker.name.findName();
-const getName = () => cookies.get('name');
-if (!getName()) {
-  cookies.set('name', userName);
-}
-
-const run = user => render(
+export default user => render(
   <Provider store={store}>
     <App userName={user} />
   </Provider>,
   document.getElementById('chat'),
 );
-
-run(getName());
