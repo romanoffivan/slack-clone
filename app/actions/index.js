@@ -17,7 +17,6 @@ export const updateMessages = (channelId, message) => async (dispatch) => {
     await axios.post(routes.addMessageUrl(channelId), { data: { attributes: message } });
     dispatch(updateMessageSuccess({ attributes: message }));
   } catch (e) {
-    console.log(e);
     dispatch(updateMessageFailure());
   }
 };
