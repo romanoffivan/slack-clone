@@ -2,6 +2,7 @@
 module.exports = {
   mode: process.env.NODE_ENV || 'development',
   entry: [
+    'babel-polyfill',
     `${__dirname}/app/index.js`,
   ],
   externals: {
