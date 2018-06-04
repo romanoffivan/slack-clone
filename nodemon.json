@@ -1,6 +1,7 @@
 {
   "verbose": true,
   "watch": [
-    "server"
+    "server",
+    "webpack.config.js"
   ]
 }
