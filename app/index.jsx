@@ -7,6 +7,8 @@ import { createStore, applyMiddleware, compose } from 'redux';
 import _ from 'lodash';
 import thunk from 'redux-thunk';
 import gon from 'gon';
+import cookies from 'js-cookie';
+import faker from 'faker';
 import App from './containers/App';
 import reducers from './reducers';
 import * as actions from './actions';
@@ -39,9 +41,17 @@ socket
     store.dispatch(actions.addMessage(data));
   });
 
-export default user => render(
+const userName = faker.name.findName();
+const getName = () => cookies.get('name');
+if (!getName()) {
+  cookies.set('name', userName);
+}
+
+const run = user => render(
   <Provider store={store}>
     <App userName={user} />
   </Provider>,
   document.getElementById('chat'),
 );
+
+run(getName());
