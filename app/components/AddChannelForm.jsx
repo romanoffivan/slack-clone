@@ -4,7 +4,7 @@ import { Field, reduxForm } from 'redux-form';
 class AddChannelForm extends React.Component {
   handleClick = () => {
     this.props.showAddChannelForm();
-    if (this.props.isShowAddChannelForm === true) {
+    if (this.props.isShowAddChannelForm) {
       this.props.reset();
     }
   }
@@ -32,7 +32,7 @@ class AddChannelForm extends React.Component {
     return (
       <div>
         <button onClick={this.handleClick} className="btn btn-primary" type="button">Add channel</button>
-        {this.props.isShowAddChannelForm === true ? this.renderForm() : null}
+        {this.props.isShowAddChannelForm ? this.renderForm() : null}
       </div>
     );
   }
