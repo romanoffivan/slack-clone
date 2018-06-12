@@ -12,7 +12,7 @@ class ChatForm extends React.Component {
 
   render() {
     return (
-      <form action="" id="msgForm" className="input-group" onSubmit={this.props.handleSubmit(this.sendUpdateMessage)}>
+      <form action="" id="msgForm" className="input-group mb-3" onSubmit={this.props.handleSubmit(this.sendUpdateMessage)}>
         <Field className="form-control" name="text" required component="input" type="text" />
         <div className="input-group-append">
           <button className="btn btn-outline-secondary" type="submit">Send</button>
