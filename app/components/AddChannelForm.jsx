@@ -1,5 +1,17 @@
 import React from 'react';
 import { Field, reduxForm } from 'redux-form';
+import connect from '../connect';
+
+const mapStateToProps = (state) => {
+  const props = {
+    channelCreatingState: state.channelCreatingState,
+    isShowAddChannelForm: state.isShowAddChannelForm,
+    sendUpdateChannels: state.sendUpdateChannels,
+  };
+  return props;
+};
+
+@connect(mapStateToProps)
 
 class AddChannelForm extends React.Component {
   handleClick = () => {
