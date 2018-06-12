@@ -5,7 +5,6 @@ module.exports = {
   entry: [
     `${__dirname}/app/index.js`,
   ],
-  devtool: 'inline-source-map',
   externals: {
     gon: 'gon',
   },
@@ -34,4 +33,11 @@ module.exports = {
       },
     ],
   },
+  plugins: [
+    new webpack.ProvidePlugin({
+      $: 'jquery',
+      jQuery: 'jquery',
+      'window.jQuery': 'jquery',
+    }),
+  ],
 };

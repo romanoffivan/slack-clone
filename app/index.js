@@ -1,5 +1,6 @@
 import cookies from 'js-cookie';
 import faker from 'faker';
+import 'bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../assets/application.css';
 import run from './index.jsx';

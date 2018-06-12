@@ -7,11 +7,12 @@ import { createStore, applyMiddleware, compose } from 'redux';
 import _ from 'lodash';
 import thunk from 'redux-thunk';
 import gon from 'gon';
-import App from './containers/App';
+import App from './components/App';
 import reducers from './reducers';
 import * as actions from './actions';
 
 const { channels, messages, currentChannelId } = gon;
+const generalChannelId = channels.find(channel => channel.name === 'general').id;
 
 const preloadedState = {
   messages: _.keyBy(messages, 'id'),
@@ -34,6 +35,16 @@ socket
   .on('disconnect', () => console.log('disconnected from server'))
   .on('newMessage', (data) => {
     store.dispatch(actions.addMessage(data));
+  })
+  .on('newChannel', (data) => {
+    store.dispatch(actions.addChannel(data));
+  })
+  .on('removeChannel', (data) => {
+    const newData = { ...data, generalChannelId };
+    store.dispatch(actions.removeChannel(newData));
+  })
+  .on('renameChannel', (data) => {
+    store.dispatch(actions.renameChannel(data));
   });
 
 export default user => render(

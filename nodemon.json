@@ -1,5 +1,8 @@
 {
   "verbose": true,
+  "ignore": [
+    "dist/*"
+  ],
   "watch": [
     "server",
     "webpack.config.js"
