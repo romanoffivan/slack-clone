@@ -1,10 +1,4 @@
 {
   "verbose": true,
-  "ignore": [
-    "dist/*"
-  ],
-  "watch": [
-    "server",
-    "webpack.config.js"
-  ]
+  "watch": ["server", "webpack.config.js"]
 }

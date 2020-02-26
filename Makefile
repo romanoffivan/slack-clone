@@ -1,25 +1,34 @@
-install: install-deps install-flow-typed
+install: install-deps
 
 start:
-	npm run nodemon -- --exec npm run babel-node -- server/bin/slack.js
+	heroku local -f Procfile.dev
+
+start-backend:
+	npx nodemon --exec npx babel-node server/bin/slack.js
+
+start-frontend:
+	npx webpack-dev-server
 
 install-deps:
 	npm install
 
 build:
 	rm -rf dist
-	NODE_ENV=production npm run build
+	npm run build
 
 test:
-	npm test
+	npm test -s
 
-check-types:
-	npm run flow
+test-coverage:
+	npm test -- --coverage
 
 lint:
-	npm run eslint ./app
+	npx eslint . --ext js,jsx
 
 publish:
 	npm publish
+
+deploy:
+	git push heroku
 
 .PHONY: test

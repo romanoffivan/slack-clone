@@ -1,3 +1,5 @@
+// @ts-check
+
 const webpack = require('webpack');
 
 module.exports = {
@@ -23,13 +25,13 @@ module.exports = {
         use: 'babel-loader',
       },
       {
-        test: /\.js?$/,
-        exclude: /node_modules/,
-        use: 'babel-loader',
-      },
-      {
-        test: /\.css$/,
-        use: ['style-loader', 'css-loader'],
+        test: /\.s[ac]ss$/i,
+        use: [
+          { loader: 'style-loader' },
+          { loader: 'css-loader' },
+          { loader: 'postcss-loader' },
+          { loader: 'sass-loader' },
+        ],
       },
     ],
   },
