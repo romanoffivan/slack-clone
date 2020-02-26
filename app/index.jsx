@@ -1,4 +1,3 @@
-import '@babel/polyfill';
 import React from 'react';
 import { render } from 'react-dom';
 import io from 'socket.io-client'; // eslint-disable-line
