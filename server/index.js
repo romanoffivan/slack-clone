@@ -1,54 +1,50 @@
+// @ts-check
+
+import 'core-js/stable';
+import 'regenerator-runtime/runtime';
+
 import path from 'path';
-import Koa from 'koa';
-import Pug from 'koa-pug';
+import Pug from 'pug';
 import socket from 'socket.io';
-import http from 'http';
-import Router from 'koa-router';
-import koaLogger from 'koa-logger';
-// import serve from 'koa-static';
-import middleware from 'koa-webpack';
-import bodyParser from 'koa-bodyparser';
-import session from 'koa-generic-session';
-import _ from 'lodash';
-import addRoutes from './routes';
+import fastify from 'fastify';
+import pointOfView from 'point-of-view';
+import fastifyStatic from 'fastify-static';
+// import _ from 'lodash';
+import addRoutes from './routes.js';
 
-import webpackConfig from '../webpack.config';
+const isProduction = process.env.NODE_ENV === 'production';
+const appPath = path.join(__dirname, '..');
+const isDevelopment = !isProduction;
 
-export default () => {
-  const app = new Koa();
-
-  app.keys = ['some secret hurr'];
-  app.use(session(app));
-  app.use(bodyParser());
-  // app.use(serve(path.join(__dirname, '..', 'public')));
-  app.use(middleware({
-    config: webpackConfig,
-  }));
-
-  const router = new Router();
-
-  app.use(koaLogger());
-  const pug = new Pug({
-    viewPath: path.join(__dirname, '..', 'views'),
-    debug: true,
-    pretty: true,
-    compileDebug: true,
-    locals: [],
-    noCache: process.env.NODE_ENV !== 'production',
-    basedir: path.join(__dirname, 'views'),
-    helperPath: [
-      { _ },
-      { urlFor: (...args) => router.url(...args) },
-    ],
+const setUpViews = (app) => {
+  const domain = isDevelopment ? 'http://localhost:8080' : '';
+  app.register(pointOfView, {
+    engine: {
+      pug: Pug,
+    },
+    defaultContext: {
+      assetPath: (filename) => `${domain}/assets/${filename}`,
+    },
+    templates: path.join(__dirname, 'views'),
   });
-  pug.use(app);
+};
 
-  const server = http.createServer(app.callback());
-  const io = socket(server);
+const setUpStaticAssets = (app) => {
+  app.register(fastifyStatic, {
+    root: path.join(appPath, 'dist/public'),
+    prefix: '/assets',
+  });
+};
 
-  addRoutes(router, io);
-  app.use(router.allowedMethods());
-  app.use(router.routes());
+export default (options) => {
+  const app = fastify();
 
-  return server;
+  setUpViews(app, options);
+  setUpStaticAssets(app);
+
+  const io = socket(app.server);
+
+  addRoutes(app, io, options.state || {});
+
+  return app;
 };
